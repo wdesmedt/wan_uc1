@@ -1,0 +1,35 @@
+---
+core:
+  num_workers: 100
+
+inventory:
+  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  options:
+    host_file: "inventory/hosts.yml"
+    group_file: "inventory/groups.yml"
+    defaults_file: "inventory/defaults.yml"
+
+user_defined:
+  GwRequest:
+    host: 10.244.253.106
+    api_version: v1
+    auth_params: ['id961837', 'Walter']
+    request_timeout: 50
+    endpoints:
+        interface:
+          path: "/interfaces"
+          r_id: "if_name"
+        lag:
+          path: "/lags"
+          r_id: "lag_id"
+        vrf:
+          path: "/l3_network_instances"
+          r_id: "vrf_name"
+        l3_interface:
+          path: "/routing/interfaces"
+          r_id: "ip_ifname"
+        vrf_interface:
+          path: "/l3_network_instances/interfaces"
+          parent: vrf
+          r_id: "ip_ifname"
+
