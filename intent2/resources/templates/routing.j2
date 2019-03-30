@@ -1,0 +1,30 @@
+---
+{% if interfaces.core is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /router/router-name=Base
+_action: enforce
+
+interface:
+{% if interfaces.loopback is defined %}
+  {% for loopback, attribs in interfaces.loopback.items() %}
+  - interface-name: {{ loopback }}
+    admin-state: {{ attribs.admin_state|d('enable') }}
+    ipv4:
+      primary:
+        address: {{ attribs.ipv4.address }}
+        prefix-length: {{ attribs.ipv4.prefix_length }}
+  {% endfor %}
+  {% endif %}
+{% if interfaces.core is defined %}
+  {% for itf, attribs in interfaces.core.items() %}
+  - interface-name: {{ itf }}
+    port: {{ attribs.port }}
+    ipv4:
+      primary:
+        address: {{ attribs.ipv4.address }}
+        prefix-length: {{ attribs.ipv4.prefix_length }}
+  {% endfor %}
+{% endif %}
+{% endif %}
+

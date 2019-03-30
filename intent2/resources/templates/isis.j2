@@ -1,0 +1,36 @@
+---
+{% if isis is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /router/router-name=Base/isis
+_action: enforce
+
+isis-instance: 0
+admin-state: enable
+advertise-passive-only: true
+ldp-over-rsvp: true
+lsp-lifetime: 35535
+traffic-engineering: true
+area-address: 49.0001
+lsp-refresh:
+  interval: 1500
+timers:
+  spf-wait:
+    spf-initial-wait: 50
+    spf-second-wait: 200
+loopfree-alternate: null
+interface:
+  - interface-name: system
+    admin-state: enable
+    passive: true
+  {% if interfaces.core is defined %}
+    {% for itf in interfaces.core %}
+  - interface-name: {{ itf }}
+    interface-type: point-to-point
+    {% endfor %}
+  {% endif %}
+level:
+  level-number: 2
+  default-metric: 16777214
+  wide-metrics-only: true
+{% endif %}

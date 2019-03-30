@@ -1,0 +1,13 @@
+_hosts:
+  - ams-tc1-r302
+  - frn-swi-r301
+  - sngp-eqx-r331
+
+ams-tc1-r302:
+  tunnels:
+    - destination: x.x.x.x
+      lsp:
+        name: l_xxx
+        primary_path:
+    - destination: x.x.x.x
+    Z

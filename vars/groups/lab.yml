@@ -1,0 +1,7 @@
+_target_scope: GROUP
+_target_groups:
+    - lab
+
+isis:
+  lsp-interval: 1024
+

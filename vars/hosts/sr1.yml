@@ -1,0 +1,21 @@
+_target_scope: HOST
+_target_host: sr1.lab
+
+interfaces:
+    network: ["1/1/1", "1/1/2"]
+
+routing:
+  grt:
+    interfaces:
+      system:
+        ipv4: 
+          primary:
+            address: 192.168.255.1
+            prefix-length: 32
+      to_sr1:
+        ipv4:
+         primary:
+           address:
+           prefix-length:
+      to_sr2:
+

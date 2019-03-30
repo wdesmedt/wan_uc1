@@ -1,0 +1,23 @@
+_target_scope: GLOBAL
+
+bgp:
+  as: 6774
+  groups:
+    internal:
+      type: internal
+      family:
+          - ipv4
+          - vpn-ipv4
+          - ipv6
+          - vpn-ipv6
+          - evpn
+    rr_clients:
+      type: internal
+      family:
+          - ipv4
+          - vpn-ipv4
+
+
+dns:
+  name: as6774.net
+

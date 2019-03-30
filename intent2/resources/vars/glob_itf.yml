@@ -1,0 +1,7 @@
+_target_scope: GLOBAL
+
+interfaces:
+    core_params:
+      ethernet:
+        mode: hybrid
+

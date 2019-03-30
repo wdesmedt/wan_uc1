@@ -2,6 +2,9 @@
 core:
   num_workers: 100
 
+logging:
+  level: debug
+
 inventory:
   plugin: nornir.plugins.inventory.simple.SimpleInventory
   options:

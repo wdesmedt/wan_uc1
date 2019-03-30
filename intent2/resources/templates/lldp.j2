@@ -1,0 +1,10 @@
+---
+{% if lldp is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /system/lldp
+_action: enforce
+
+admin-state: {{ lldp.admin_state }}
+{% endif %}
+

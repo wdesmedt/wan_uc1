@@ -1,0 +1,42 @@
+_target_scope: HOST
+_target_host: sr1.lab
+
+interfaces:
+  loopback:
+    system:
+      ipv4:
+        address: 192.168.255.1
+        prefix_length: 32
+  core:
+    to_sr2:
+      port: 1/1/1:1
+      admin_state: enable
+      isis: true 
+      mpls: true
+      ldp: true
+      rsvp: true
+      lldp: true
+      ipv4:
+        address: 192.168.0.0
+        prefix_length: 31
+    to_sr3:
+      port: 1/1/2:1
+      admin_state: enable
+      isis: true
+      lldp: true
+      ipv4:
+        address: 192.168.0.2
+        prefix_length: 31
+
+bgp:
+  admin_state: enable
+  neighbors:
+    192.168.255.2:
+      group: internal
+    192.168.255.3:
+      group: internal
+    192.168.255.4:
+      group: internal
+      admin_state: disable
+
+

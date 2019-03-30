@@ -1,0 +1,4 @@
+_target_scope: GLOBAL
+
+lldp:
+  admin_state: enable

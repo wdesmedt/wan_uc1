@@ -1,0 +1,32 @@
+---
+{% if bgp is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /router/router-name=Base
+_action: enforce
+
+{% if bgp.as is defined %}
+autonomous-system: {{ bgp.as }}
+{% endif %}
+bgp:
+  admin-state: {{ bgp.admin_state|default('enable') }}
+{% if bgp.groups is defined %}
+  group:
+    {% for group, attrib in bgp.groups.items() %}
+    - group-name: {{ group }}
+      type: {{ attrib.type }}
+      family:
+        {% for family in attrib.family %}
+        {{ family }}: true
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+{% if bgp.neighbors is defined %}
+  neighbor:
+    {% for neighbor, attrib in bgp.neighbors.items() %}
+    - ip-address: {{ neighbor }}
+      admin-state: {{ attrib.admin_state|default('enable') }}
+      group: {{ attrib.group }}
+    {% endfor %}
+{% endif %}
+{% endif %}
