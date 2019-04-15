@@ -1,0 +1,22 @@
+---
+{% if sdp is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /service
+_action: enforce
+_exec_order: 10
+
+sdp:
+{% for s, attrs in sdp.items() %}
+  - sdp-id: {{ s }}
+    admin-state: enable
+    description: managed by CICD
+    delivery-type: mpls
+    signaling: tldp
+    ldp: true
+    far-end:
+      ip-address: {{ attrs.destination }}
+ {% endfor %}
+ {% endif %}
+
+

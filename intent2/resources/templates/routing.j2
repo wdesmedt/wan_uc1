@@ -4,7 +4,11 @@ _target_scope: HOST
 _target_host: {{ hostname }}
 _path: /router/router-name=Base
 _action: enforce
+_exec_order: 3
 
+{% if bgp.as is defined %}
+autonomous-system: {{ bgp.as }}
+{% endif %}
 interface:
 {% if interfaces.loopback is defined %}
   {% for loopback, attribs in interfaces.loopback.items() %}

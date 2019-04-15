@@ -73,7 +73,7 @@ def main():
 
     print_title("Runbook to push intent")
     print_result(results, vars = "diff")
-#    print_result(results)
+#   print_result(results)
 
 if __name__ == "__main__":
     main()

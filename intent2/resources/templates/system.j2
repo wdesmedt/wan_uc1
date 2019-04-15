@@ -1,0 +1,42 @@
+---
+{% if system is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /system
+_action: enforce
+_exec_order: 1
+
+name: {{ hostname }}
+management-interface:
+  configuration-mode: model-driven
+  netconf:
+    admin-state: enable
+    capabilities:
+      candidate: true
+      writable-running: false
+login-control:
+  ssh:
+    graceful-shutdown: true
+    inbound-max-sessions: {{ system.ssh_max_sessions | d(50) }}
+security:
+  {% if system.snmp_communities is defined %}
+  snmp:
+    "@operation": replace
+    community:
+    {% for comm in system.snmp_communities %}
+      - community-string: {{ comm.community }}
+        access-permissions: {{ comm.permissions }}
+        version: v2c
+    {% endfor %}
+  {% endif %}
+  user-params:
+    local-user:
+      user:
+        - user-name: nc
+          access:
+            console: true
+            netconf: true
+          console:
+            member: administrative
+{% endif %}
+

@@ -1,0 +1,18 @@
+---
+{% if interfaces.core is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /router/router-name=Base/ldp
+_action: enforce
+_exec_order: 6
+
+{% if interfaces.core is defined %}
+interface-parameters:
+  interface:
+  {% for itf in interfaces.core %}
+  - ip-int-name: {{ itf }}
+    ipv4: null
+  {% endfor %}
+{% endif %}
+{% endif %}
+

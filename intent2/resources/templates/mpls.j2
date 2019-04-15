@@ -1,0 +1,26 @@
+{# rsvp and mpls must be configured together on sros #}
+---
+{% if interfaces.core is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /router/router-name=Base
+_action: enforce
+_exec_order: 5
+
+mpls:
+  admin-state: enable
+  interface:
+    {% for itf in interfaces.core %}
+    - interface-name: {{ itf }}
+    {% endfor %}
+rsvp:
+  admin-state: enable
+  interface:
+    - interface-name: system
+      admin-state: enable
+    {% for itf in interfaces.core %}
+    - interface-name: {{ itf }}
+      admin-state: enable
+    {% endfor %}
+{% endif %}
+

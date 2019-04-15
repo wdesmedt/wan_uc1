@@ -4,6 +4,7 @@ _target_scope: HOST
 _target_host: {{ hostname }}
 _path: /
 _action: enforce
+_exec_order: 1
 
 port:
 {% for itf, attribs in interfaces.core.items() %}
@@ -20,5 +21,14 @@ port:
           transmit: true
           tx-tlvs:
             sys-name: true
-  {% endfor %}
+{% endfor %}
+{% if interfaces.access is defined %}
+{% for itf, attribs in interfaces.access.items() %}
+  - port-id: {{ itf }}
+    admin-state: {{ attribs.admin_state }}
+    ethernet:
+      mode: access
+      encap-type: {{ attribs.encap }}
+{% endfor %}
+{% endif %}
 {% endif %}
