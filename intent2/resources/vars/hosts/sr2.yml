@@ -27,6 +27,14 @@ interfaces:
       ipv4:
         address: 192.168.0.4
         prefix_length: 31
+  access:
+    1/1/3:
+        admin_state: enable
+        encap: qinq
+    1/1/4:
+        admin_state: enable
+        encap: qinq
+
 bgp:
   admin_state: enable
   neighbors:
@@ -38,3 +46,9 @@ bgp:
       group: internal
       admin-state: disable       
 
+mpls:
+sdp:
+  1021:
+    destination: 192.168.255.1
+  1023:
+    destination: 192.168.255.3

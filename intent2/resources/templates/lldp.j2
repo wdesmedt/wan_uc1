@@ -4,6 +4,7 @@ _target_scope: HOST
 _target_host: {{ hostname }}
 _path: /system/lldp
 _action: enforce
+_exec_order: 2
 
 admin-state: {{ lldp.admin_state }}
 {% endif %}

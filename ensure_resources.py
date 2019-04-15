@@ -40,7 +40,8 @@ def validate_intent(
 
     task.host["intent"] = r.result 
 
-    for res_path, resource in task.host["intent"].items():
+    for res_path, resource in sorted(task.host["intent"].items(), 
+                key = lambda x: x[1].get("_exec_order", 99)):
         dry_run = True
         if resource.get("_action", None):
             if resource["_action"].lower() == "enforce":
@@ -52,6 +53,7 @@ def validate_intent(
             dry_run = dry_run,
             configuration = resource,
             path=res_path,
+            force = True    
         )
 
 def main():
@@ -70,7 +72,8 @@ def main():
 #    results = nr2.run(task=validate_intent, intent_dir="intents")
 
     print_title("Runbook to push intent")
-    print_result(results)
+    print_result(results, vars = "diff")
+#   print_result(results)
 
 if __name__ == "__main__":
     main()

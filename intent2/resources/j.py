@@ -15,9 +15,62 @@ def render_file(
 def load_vars(
     filename,
     ):
-    with open(filename, "r") as f:
+    with open(filename, "r") as f: 
         yml = ruamel.yaml.YAML(typ="safe")
         data = yml.load(f)
     return data
+
+data = {
+    'sr1.lab': {
+        'config': {
+            'router': {
+                'interface': [
+                    {'interface-name': 'system',
+                    'ipv4': {
+                        'primary': {
+                            'address': '192.168.255.1',
+                            'prefix-length': 32
+                            },
+                    },
+                    },
+                ]
+            },
+            'service': {
+                'sdp': [
+                    {
+                        'sdp-id': 123,
+                        'far-end': '192.168.255.1'
+                    },
+                ]
+            }        
+        },
+    },
+    'sr2.lab': {
+          'config': {
+            'router': {
+                'interface': [
+                    {'interface-name': 'system',
+                    'ipv4': {
+                        'primary': {
+                            'address': '192.168.255.1',
+                            'prefix-length': 32
+                            },
+                    },
+                    },
+                ]
+            },
+            'service': {
+                'sdp': [
+                    {
+                        'sdp-id': 123,
+                        'far-end': '192.168.255.1'
+                    },
+                ]
+            }
+        },
+    },      
+    }
+
+
 
 

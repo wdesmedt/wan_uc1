@@ -1,0 +1,37 @@
+{% if mpls is defined %}
+{% if mpls.lsps is defined %}
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /router/router-name=Base/mpls
+_action: enforce
+_exec_order: 5
+
+{% if mpls.paths is defined %}
+path:
+  {% for path, attribs in mpls.paths.items() %}
+  - path-name: {{ path }}
+    admin-state: {{ attribs.admin_state|d('enable') }}
+    {% if attribs.hops is defined %}
+    hop:
+    {% for hop, hop_attrib in attribs.hops.items() %}
+      - hop-index: {{ hop }}
+        ip-address: {{ hop_attrib.ip_address }}
+        type: {{ hop_attrib.type }}
+    {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+lsp:
+{% for lsp, lsp_attrib in mpls.lsps.items() %}
+  - lsp-name: {{ lsp }}
+    type: {{ lsp_attrib.type|d('p2p-rsvp') }}
+    to: {{ lsp_attrib.destination }}
+    {% if lsp_attrib.cspf is defined %}
+    cspf: null
+    {% endif %}
+    primary:
+      path-name: {{ lsp_attrib.primary.path_name }}
+{% endfor %}
+{% endif %}
+{% endif %}
+

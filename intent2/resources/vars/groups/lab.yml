@@ -1,0 +1,12 @@
+---
+_target_scope: GROUP
+_target_groups: [ lab ]
+
+system:
+  ssh_max_sessions: 40
+  snmp_communities:
+    - community: private
+      permissions: rw
+    - community: public
+      permissions: r
+      

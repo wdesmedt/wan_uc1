@@ -1,0 +1,25 @@
+---
+_target_scope: HOST
+_target_host: {{ hostname }}
+_path: /service/epipe
+_action: enforce
+_exec_order: 10
+
+service-name: ELINE_{{ service_id }}_{{ customer }}
+{% if operation == "delete" %}
+"@operation": remove
+{% else %}
+"@operation": replace
+admin-state: enable
+service-id: {{ service_id }}
+customer: 1
+sap:
+{% for sap in saps %}
+  - sap-id: {{ sap }}
+    description: "customer: {{ customer }}"
+{% endfor %}
+{% if sdp_id is defined %}
+spoke-sdp:
+  sdp-bind-id: {{ sdp_id }}:{{ vc_id }}
+{% endif %}
+{% endif %}

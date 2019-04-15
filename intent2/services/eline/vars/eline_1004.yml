@@ -1,0 +1,24 @@
+---
+_service_id: 1004
+_service_type: eline # should refer to function/callable 
+_service_hosts: ['sr1.lab', 'sr3.lab']
+_service_operation: delete
+_service_required_resources: 
+  - /service/sdp
+  - /router/router-name=Base/interface/interface-name=system
+
+# global service parameters
+customer: XXXY/ABC
+service_bw: 1500
+service_class: af
+vc_id: 1004
+
+# host-specific service params
+host_params:
+  sr1.lab:
+    saps:
+      - 1/1/4:111.*
+  sr3.lab:
+    saps:
+      - 1/1/3:111.*
+

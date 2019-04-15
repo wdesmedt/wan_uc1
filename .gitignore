@@ -104,3 +104,4 @@ output/
 .mypy_cache/
 
 .vscode
+state/**

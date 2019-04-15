@@ -1,0 +1,15 @@
+service-name: ELINE_{{ customer }}
+service-id: {{ service_id }}
+customer: 1
+{% for sap in {{hostname}}.saps %}
+    sap {{ sap }}
+{% endfor %}
+hostname: {{ hostname }}
+
+{# {% for itf in data.{{hostname}}.config.router.interface %}
+#     {% if eq( itf['interface-name'], "system") %}
+#     {% set system_ip = itf.ipv4.primary.address %}
+#     {% endif %}
+# {% endfor %}
+# system_ip: {{ system_ip }}
+#}

@@ -1,0 +1,17 @@
+---
+_target_scope: HOST
+_target_host: sr1.lab
+_path: /service/epipe
+_action: enforce
+_exec_order: 10
+
+service-name: ELINE_1001_XXXX/ABC
+"@operation": replace
+admin-state: enable
+service-id: 1001
+customer: 1
+sap:
+  - sap-id: 1/1/3:20.*
+    description: "customer: XXXX/ABC"
+spoke-sdp:
+  sdp-bind-id: 112:1001

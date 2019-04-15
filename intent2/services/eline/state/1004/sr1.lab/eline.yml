@@ -1,0 +1,9 @@
+---
+_target_scope: HOST
+_target_host: sr1.lab
+_path: /service/epipe
+_action: enforce
+_exec_order: 10
+
+service-name: ELINE_1004_XXXY/ABC
+"@operation": remove
