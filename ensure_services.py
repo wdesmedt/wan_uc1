@@ -1,7 +1,4 @@
-<<<<<<< .merge_file_f56hq9
 import os
-=======
->>>>>>> .merge_file_J63gb9
 from typing import Optional, Any
 
 from nornir import InitNornir
