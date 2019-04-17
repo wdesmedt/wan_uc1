@@ -5,7 +5,11 @@ _path: /service/epipe
 _action: enforce
 _exec_order: 10
 
+<<<<<<< HEAD
 service-name: ELINE_1001_XXXX/ABC
+=======
+service-name: ELINE_XXXX/ABC
+>>>>>>> e30285bf22d72c8b11b7b61181576267930228f5
 "@operation": replace
 admin-state: enable
 service-id: 1001
